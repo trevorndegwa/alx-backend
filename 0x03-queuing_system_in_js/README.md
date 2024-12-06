@@ -116,4 +116,42 @@ Perform the following Redis operations:
 
 After completion, copy the `dump.rdb` file to the project directory.
 
+## Task 1: Node Redis Client
 
+Steps to connect to the Redis server using Node.js:
+
+1. Install `node_redis` (Redis client for Node.js) by running the following command in your project directory:
+   ```bash
+   npm install redis
+   ```
+
+2. Write a script named `0-redis_client.js` to connect to the Redis server:
+   - Import the `createClient` method from the `redis` package.
+   - Set up event listeners to log whether the connection is successful or if it fails.
+
+   The script should look like this:
+
+   ```javascript
+   import { createClient } from 'redis';
+
+   const client = createClient();
+
+   client.on('error', (err) => console.log(`Redis client not connected to the server: ${err}`));
+   client.on('connect', () => {
+       console.log('Redis client connected to the server');
+   });
+   ```
+
+3. Run the script using `npm run dev 0-redis_client.js`.
+
+4. Expected output:
+   - If the Redis server is running and the connection is successful, it should log:
+     ```
+     Redis client connected to the server
+     ```
+   - If there is an issue connecting, it should log:
+     ```
+     Redis client not connected to the server: [Error details]
+     ```
+
+---

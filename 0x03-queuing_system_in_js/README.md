@@ -154,4 +154,21 @@ Steps to connect to the Redis server using Node.js:
      Redis client not connected to the server: [Error details]
      ```
 
----
+## Task 2: Node Redis client and basic operations
+
+### Requirements:
+1. In the `1-redis_op.js` file, the following operations were added to the Redis client:
+   - **`setNewSchool(schoolName, value)`**: This function accepts two arguments: `schoolName` and `value`, and it sets the value for the key `schoolName` in Redis. It logs a confirmation message using `redis.print`.
+   - **`displaySchoolValue(schoolName)`**: This function accepts one argument: `schoolName`, and it retrieves the value associated with that school name from Redis. It logs the value to the console.
+
+### Execution:
+1. **`displaySchoolValue('Holberton')`** is called to display the value for the key `'Holberton'` from Redis.
+2. **`setNewSchool('HolbertonSanFrancisco', '100')`** is called to set a new value for the key `'HolbertonSanFrancisco'`.
+3. **`displaySchoolValue('HolbertonSanFrancisco')`** is called to display the value for the newly set key.
+
+### Example Output:
+```
+Redis client connected to the server
+Holberton: School
+Reply: OK
+HolbertonSanFrancisco: 100

@@ -14,7 +14,7 @@
     "@babel/preset-env": "^7.26.0"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node --presets @babel/preset-env 0-redis_client.js"
+    "dev": "nodemon --exec babel-node --presets @babel/preset-env"
   },
   "keywords": [],
   "author": "",

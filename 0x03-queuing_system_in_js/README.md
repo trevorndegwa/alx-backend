@@ -197,3 +197,59 @@ Redis client connected to the server
 School
 Reply: OK
 100
+
+### Task 4: Node Redis Client and Advanced Operations
+
+In this task, we are going to store and retrieve hash values in Redis using the `hset` and `hgetall` commands.
+
+#### Create Hash
+
+Using the `hset` command, we store the following data under the key `ALX`:
+
+- **Portland**: 50
+- **Seattle**: 80
+- **New York**: 20
+- **Bogota**: 20
+- **Cali**: 40
+- **Paris**: 2
+
+We make sure to use `redis.print` for each `hset` to confirm the operation.
+
+#### Display Hash
+
+Using the `hgetall` command, we retrieve and display the hash object stored under the `ALX` key. It returns the following data:
+
+- **Portland**: 50
+- **Seattle**: 80
+- **New York**: 20
+- **Bogota**: 20
+- **Cali**: 40
+- **Paris**: 2
+
+#### Commands Used:
+- `hset` - Store a value in a Redis hash
+- `hgetall` - Retrieve all fields and values from a Redis hash
+
+#### Run Instructions:
+To run the script, use the following command:
+
+```bash
+npm run dev 4-redis_advanced_op.js
+Expected Output:
+Redis client connected to the server
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+{
+  Portland: '50',
+  Seattle: '80',
+  'New York': '20',
+  Bogota: '20',
+  Cali: '40',
+  Paris: '2'
+}
+
+

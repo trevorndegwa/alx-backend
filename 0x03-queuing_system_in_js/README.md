@@ -172,3 +172,28 @@ Redis client connected to the server
 Holberton: School
 Reply: OK
 HolbertonSanFrancisco: 100
+
+### 3. Node Redis client and async operations
+
+#### Objective
+This task modifies the previous Redis client operations to utilize asynchronous operations with ES6 `async`/`await` syntax and Node's `promisify` utility. This enables the `displaySchoolValue` function to work asynchronously.
+
+#### Changes Made
+1. **Promisify**: Used Node's `util.promisify` to convert the Redis `get` method into a promise-based method, allowing the use of `async`/`await`.
+2. **Async/Await**: Updated the `displaySchoolValue` function to use `async`/`await` for handling asynchronous Redis operations.
+   
+#### Instructions
+1. Copy the code from `1-redis_op.js` into a new file called `2-redis_op_async.js`.
+2. Modify the `displaySchoolValue` function to use `async`/`await` for Redis operations.
+3. Run the script with the following command:
+
+```bash
+npm run dev 2-redis_op_async.js
+
+Expected Output
+Upon running the script, the following output should appear in the console:
+
+Redis client connected to the server
+School
+Reply: OK
+100

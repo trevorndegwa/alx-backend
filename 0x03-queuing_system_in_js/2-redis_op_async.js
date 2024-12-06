@@ -1,52 +1,41 @@
 import redis from 'redis';
-import util from 'util'; // Import the util module
+import { promisify } from 'util';
 
-// Create a Redis client and connect to the Redis server
-const client = redis.createClient({
-  url: 'redis://127.0.0.1:6379', // Connect to the Redis server running locally on the default port
-});
+const client = redis.createClient();
 
-client.on('error', (err) => {
-  console.log(`Redis client not connected to the server: ${err.message}`);
-});
-
-client.on('connect', () => {
+client.on('connect', function() {
   console.log('Redis client connected to the server');
 });
 
-// Promisify the client.get method using util.promisify
-const getAsync = util.promisify(client.get).bind(client);
+client.on('error', function (err) {
+  console.log('Redis client not connected to the server: ' + err);
+});
 
-// Function to set a new school in Redis
+// Promisify the get method
+const getAsync = promisify(client.get).bind(client);
+
 function setNewSchool(schoolName, value) {
-  client.set(schoolName, value, (error, response) => {
-    if (error) {
-      console.log(`Error setting ${schoolName}: ${error.message}`);
+  client.set(schoolName, value, (err, reply) => {
+    if (err) {
+      console.log('Error setting school:', err);
     } else {
-      console.log(`Reply: ${response}`); // Expected: OK
+      console.log('Reply:', reply);  // "Reply: OK"
     }
   });
 }
 
-// Function to display the value of a school using async/await
-let displaySchoolValue = async (schoolName) => {
+// Use async/await for displaySchoolValue
+async function displaySchoolValue(schoolName) {
   try {
-    const value = await getAsync(schoolName);  // Use the promisified getAsync
-    console.log(value || 'not found');  // Expected: School or not found if the key doesn't exist
+    const reply = await getAsync(schoolName);
+    console.log(reply);  // Displays the value of the school key
   } catch (err) {
-    console.log(`Error retrieving value for ${schoolName}: ${err.message}`);
+    console.log('Error getting school value:', err);
   }
-};
+}
 
-// Start the Redis client connection and run functions
-client.connect()
-  .then(() => {
-    // After the connection is established, run the functions
-    displaySchoolValue('Holberton');  // Expected to print: School (if set previously)
-    setNewSchool('HolbertonSanFrancisco', '100');  // Expected to reply: OK
-    displaySchoolValue('HolbertonSanFrancisco');  // Expected to print: 100
-  })
-  .catch((err) => {
-    console.log(`Connection failed: ${err.message}`);
-  });
+// Call functions
+displaySchoolValue('ALX');
+setNewSchool('ALXSanFrancisco', '100');
+displaySchoolValue('ALXSanFrancisco');
 
